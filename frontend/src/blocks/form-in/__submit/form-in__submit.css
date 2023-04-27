@@ -1,0 +1,31 @@
+.form-in__submit {}
+
+.form-in__submit {
+    width: 100%;
+    margin: 48px 0 37px 0;
+   height: 50px; 
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    background: #FFFFFF;
+    border-radius: 2px;
+    border: none;
+    color: #000000;
+    transition: opacity 0.1s linear;
+    max-width: 358px;
+    cursor: pointer;
+    margin-top: 216px;
+}
+
+.form-in__submit:hover {
+    opacity: 0.8;
+}
+
+@media screen and (max-width:550px) {
+    .form-in__submit {
+        margin-top: 173px;
+        font-size: 16px;
+        line-height: 19px;
+        height: 46px;
+    }
+}

@@ -1,0 +1,21 @@
+.header__change {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 410px) {
+    .header__change {
+
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
+
+.header__change:hover {
+    opacity: 0.6;
+  }

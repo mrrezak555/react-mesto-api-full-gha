@@ -1,0 +1,12 @@
+.popup__container_photo{
+    border-radius: 0;
+    background: none;
+    max-width: fit-content;
+}
+
+@media screen and (max-width:550px) {
+    .popup__container_photo{
+        max-width: 500px;
+        min-width: 150px;
+    }
+}

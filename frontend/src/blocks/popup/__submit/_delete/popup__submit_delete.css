@@ -1,0 +1,12 @@
+.popup__submit_delete{
+    max-width: 358px;
+    margin: 38px 36px 36px 36px;
+}
+
+@media screen and (max-width:550px) {
+    .popup__submit_delete{
+        margin-left: 25px;
+        margin-bottom: 25px;
+        max-width: 238px;
+    }
+}

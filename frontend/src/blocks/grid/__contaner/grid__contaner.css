@@ -1,0 +1,5 @@
+.grid__contaner{
+    display: flex;
+    flex-direction: column;
+    width: 22px;
+}

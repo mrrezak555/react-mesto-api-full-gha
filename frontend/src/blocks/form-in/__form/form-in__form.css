@@ -1,0 +1,9 @@
+.form-in__form{
+    width: 358px;
+}
+
+@media screen and (max-width:550px) {
+    .form-in__form{
+        width: 260px;
+    }
+}
