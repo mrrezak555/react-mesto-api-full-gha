@@ -220,7 +220,7 @@ function App() {
         setEmail(data1.email)
         localStorage.setItem('jwt', data.token)
         api.setToken(data.token)
-        console.log(data.token)
+        //console.log(data.token)
       })
       .catch((err) => {
         console.log(`Ошибка. Запрос не выполнен ${err}`);
