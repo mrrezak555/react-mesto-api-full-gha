@@ -6,7 +6,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 62.84.123.34
+IP-адрес 158.160.28.55
 
 Frontend https://mesto.insta.nomoredomains.monster
 

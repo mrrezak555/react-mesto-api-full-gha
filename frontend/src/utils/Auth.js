@@ -44,6 +44,7 @@ class Auth {
 
 const auth = new Auth({
     baseUrl: 'https://api.mesto.insta.nomoredomains.monster',
+    //baseUrl: 'http://localhost:3001',
     headers: {
         'Content-Type': 'application/json'
     }

@@ -51,8 +51,7 @@ function App() {
     if (loggedIn){
       api.getUserInfo()
       .then((data) => {
-        //console.log(data)
-        setCurrentUser(data)
+        setCurrentUser(data.userData)
         //console.log(currentUser.avatar)
       })
       .catch((err) => {
@@ -66,6 +65,7 @@ function App() {
     if (loggedIn) {
       api.getInitialCards()
         .then((data) => {
+          //console.log(data)
           setCards(data)
         })
         .catch((err) => {
@@ -81,15 +81,15 @@ function App() {
   function tokenCheck() {
     if (localStorage.getItem('jwt')) {
       const jwt = localStorage.getItem('jwt');
-
+      //console.log(jwt);
       if (jwt) {
         // проверим токен
         auth.checkToken(jwt).then((res) => {
           if (res) {
             // авторизуем пользователя
-            //api.setToken(jwt)
+            api.setToken(jwt);
             setLoggedIn(true);
-            setEmail(res.data.email)
+            setEmail(res.userData.email)
           }
         })
         .catch((err) => {
@@ -176,7 +176,7 @@ function App() {
   function handleUpdateAvatar(link) {
     api.changeAvatar(link.avatar)
       .then((data) => {
-        setCurrentUser(data)
+        setCurrentUser(data.data)
         closeAllPopups()
       })
       .catch((err) => {
@@ -187,7 +187,7 @@ function App() {
   function hadleAddPlace(data) {
     api.addNewCard(data)
       .then((data) => {
-        setCards([data, ...cards]);
+        setCards([data.card, ...cards]);
         closeAllPopups()
       })
       .catch((err) => {
@@ -219,6 +219,8 @@ function App() {
         setLoggedIn(true)
         setEmail(data1.email)
         localStorage.setItem('jwt', data.token)
+        api.setToken(data.token)
+        console.log(data.token)
       })
       .catch((err) => {
         console.log(`Ошибка. Запрос не выполнен ${err}`);

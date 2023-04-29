@@ -28,10 +28,23 @@ const userValidationSchema = {
   }),
 };
 
+const userAvatarValidationSchema = {
+  body: Joi.object({
+    avatar: Joi.string().custom(linkValidator).default('https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png'),
+  }),
+};
+
+const userInfoValidationSchema = {
+  body: Joi.object({
+    name: Joi.string().min(2).max(30).default('Жак-Ив Кусто'),
+    about: Joi.string().min(2).max(30).default('Исследователь'),
+  }),
+};
+
 router.get('/me', getCurrentUser);
 router.get('/', celebrate(userValidationSchema), getUsers);
 router.get('/:id', celebrate(userValidationSchema), getUser);
-router.patch('/me', celebrate(userValidationSchema), updateUser);
-router.patch('/me/avatar', celebrate(userValidationSchema), updateAvatar);
+router.patch('/me', celebrate(userInfoValidationSchema), updateUser);
+router.patch('/me/avatar', celebrate(userAvatarValidationSchema), updateAvatar);
 
 module.exports = router;

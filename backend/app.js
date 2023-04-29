@@ -4,11 +4,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { router } = require('./routes/index');
 const { errors } = require('celebrate');
+const cors = require('./middlewares/cros');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const INTERNAL_ERROR = 500;
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
@@ -17,6 +18,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 const app = express();
 //  app.use(express.static(path.join((__dirname, 'public'))))
 app.use(requestLogger);
+app.use(cors);
 app.use(express.json());
 app.use(errors());
 app.use('/', router);

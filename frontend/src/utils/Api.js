@@ -11,10 +11,10 @@ class Api {
 
   setToken(jwt){
     this._headers = {
-      authorization: jwt,
+      "Authorization": `Bearer ${jwt}`,
       'Content-Type': 'application/json'
     }
-    console.log(this._headers)
+    //console.log(this._headers)
   }
 
   _checkResponse(res) {
@@ -91,6 +91,7 @@ class Api {
 
 const api = new Api({
   baseUrl: 'https://api.mesto.insta.nomoredomains.monster'
+  //baseUrl: 'http://localhost:3001'
 });
 
 export { api };

@@ -74,7 +74,7 @@ const createUser = (req, res, next) => {
 const updateUser = (req, res, next) => {
   // обновим имя найденного по _id пользователя
   const owner = req.user._id;
-  User.findByIdAndUpdate(owner, req.body, {
+  User.findByIdAndUpdate(owner, { name: req.body.name, about: req.body.about }, {
     new: true, // обработчик then получит на вход обновлённую запись
     runValidators: true, // данные будут валидированы перед изменением
   })
@@ -91,12 +91,12 @@ const updateUser = (req, res, next) => {
 
 const updateAvatar = (req, res, next) => {
   const owner = req.user._id;
-  User.findByIdAndUpdate(owner, req.body.avatar, {
+  User.findByIdAndUpdate(owner, { avatar: req.body.avatar }, {
     new: true, // обработчик then получит на вход обновлённую запись
     runValidators: true, // данные будут валидированы перед изменением
   })
     .orFail(() => new NotFoundError('Запрашиваемый пользователь не найден'))
-    .then(() => res.send({ data: req.body }))
+    .then((data) => res.send({ data }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new ValidationError('Невалидный идентификатор пользователя.'));
