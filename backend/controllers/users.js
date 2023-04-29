@@ -30,10 +30,9 @@ const getUser = (req, res, next) => {
     .catch(
       (err) => {
         if (err.name === 'CastError') {
-          next(new ValidationError('Ошибка валидации запроса'));
-        } else {
-          next(err);
+          return next(new ValidationError('Ошибка валидации запроса'));
         }
+        return next(err);
       },
     );
 };
@@ -61,12 +60,11 @@ const createUser = (req, res, next) => {
     .catch(
       (err) => {
         if (err.name === 'ValidationError') {
-          next(new ValidationError('Ошибка валидации запроса'));
+          return next(new ValidationError('Ошибка валидации запроса'));
         } if (err.code === 11000) {
-          next(new EmailError('Пользователь с таким email уже существует'));
-          return;
+          return next(new EmailError('Пользователь с таким email уже существует'));
         }
-        next(err);
+        return next(err);
       },
     );
 };
@@ -82,10 +80,9 @@ const updateUser = (req, res, next) => {
     .then((user) => res.status(NO_ERROR).send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new ValidationError('Невалидный идентификатор пользователя.'));
-      } else {
-        next(err);
+        return next(new ValidationError('Невалидный идентификатор пользователя.'));
       }
+      return next(err);
     });
 };
 
@@ -99,10 +96,9 @@ const updateAvatar = (req, res, next) => {
     .then((data) => res.send({ data }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new ValidationError('Невалидный идентификатор пользователя.'));
-      } else {
-        next(err);
+        return next(new ValidationError('Невалидный идентификатор пользователя.'));
       }
+      return next(err);
     });
 };
 

@@ -22,10 +22,9 @@ const createCard = (req, res, next) => {
     .catch(
       (err) => {
         if (err.name === 'ValidationError') {
-          next(new ValidationError('Ошибка валидации запроса'));
-        } else {
-          next(err);
+          return next(new ValidationError('Ошибка валидации запроса'));
         }
+        return next(err);
       },
     );
 };

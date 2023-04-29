@@ -9,14 +9,7 @@ const {
   createUser,
 } = require('../controllers/users');
 
-const NOT_FOUND = 404;
-class NotFoundError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = 'NotFoundError';
-    this.statusCode = NOT_FOUND;
-  }
-}
+const NotFoundError = require('../errors/NotFoundError');
 
 // Собственный валидатор для ссылок
 const linkValidator = (value, helpers) => {
@@ -46,7 +39,12 @@ router.get('/crash-test', () => {
 
 router.use('/users', auth, userRoutes);
 router.use('/cards', auth, cardRoutes);
-router.post('/signin', celebrate(userValidationSchema), login);
+router.post('/signin', celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required().min(3),
+  }),
+}), login);
 router.post('/signup', celebrate(userValidationSchema), createUser);
 router.use((req, res, next) => next(new NotFoundError('Проверьте корректность пути запроса')));
 
